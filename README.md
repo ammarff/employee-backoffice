@@ -96,10 +96,10 @@ bukan sertifikasi WCAG; pengujian manual dengan screen reader dan perangkat fisi
 
 ## Status pengumpulan
 
-Audit requirement dan hasil verifikasi dicatat di `learning/assessment-audit.md`.
+Verifikasi terakhir: 95 tes lulus dan build produksi berhasil tanpa peringatan budget.
 Repo publik: [ammarff/employee-backoffice](https://github.com/ammarff/employee-backoffice).
-Dependencies, build/cache, file environment rahasia, dan latihan pribadi dikecualikan
-melalui `.gitignore`. File latihan tetap tersedia secara lokal, tanpa diunggah.
+Dependencies, build/cache, file environment rahasia, `learning/`, dan `.vscode/`
+dikecualikan melalui `.gitignore`. Folder lokal tetap tersedia tanpa dilacak Git.
 
 Menyimpan sorting, page index, dan page size ke URL adalah pengembangan opsional,
 bukan syarat PDF. Saat ini filter pencarian yang dipertahankan, sementara paging/sorting
