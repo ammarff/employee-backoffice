@@ -143,6 +143,11 @@ describe('EmployeeList', () => {
     expect(link?.textContent?.trim()).toBe('employee12');
     expect(link?.getAttribute('href'))
       .toBe('/employees/employee-12?username=employee1&group=Group%202');
+    const detail = page.querySelector('a[aria-label="Detail employee12"]');
+    expect(detail?.hasAttribute('mat-icon-button')).toBe(true);
+    expect(detail?.querySelector('mat-icon')?.getAttribute('fontIcon')).toBe('visibility');
+    expect(detail?.getAttribute('href'))
+      .toBe('/employees/employee-12?username=employee1&group=Group%202');
   });
 
   it('restores search filters from the URL', async () => {
@@ -233,6 +238,9 @@ describe('EmployeeList', () => {
 
     expect(button).not.toBeNull();
     expect(button?.type).toBe('button');
+    expect(button?.hasAttribute('mat-icon-button')).toBe(true);
+    expect(button?.querySelector('mat-icon')?.getAttribute('fontIcon')).toBe(action.toLowerCase());
+    expect(button?.querySelector('mat-icon')?.getAttribute('aria-hidden')).toBe('true');
     button!.click();
     await fixture.whenStable();
 
@@ -241,6 +249,8 @@ describe('EmployeeList', () => {
     expect(await notification.getMessage()).toBe(`${action} employee1 (demo, data tidak diubah).`);
     expect(await (await notification.host()).hasClass(panelClass)).toBe(true);
     expect(await notification.getAriaLive()).toBe('polite');
+    const wrapper = document.querySelector<HTMLElement>('.cdk-global-overlay-wrapper');
+    expect(wrapper?.style.alignItems).toBe('flex-start');
     expect(JSON.stringify(component.store.employees())).toBe(before);
     expect(localStorage.getItem('employee-backoffice-employees')).toBe(saved);
 

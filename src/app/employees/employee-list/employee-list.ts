@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import '@angular/common/locales/global/id';
@@ -18,7 +19,7 @@ import '@angular/common/locales/global/id';
   imports: [
   MatTableModule, MatPaginatorModule, MatSortModule,
   ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSnackBarModule, RouterLink,
-  CurrencyPipe,
+  CurrencyPipe, MatIconModule,
 ],
   selector: 'app-employee-list',
   styleUrl: './employee-list.scss',
@@ -58,6 +59,7 @@ export class EmployeeList implements OnInit, AfterViewInit {
     this.snackBar.open(`${action} ${username} (demo, data tidak diubah).`, 'Tutup', {
       panelClass: action === 'Edit' ? 'notification-edit' : 'notification-delete',
       politeness: 'polite',
+      verticalPosition: 'top',
     });
   }
 

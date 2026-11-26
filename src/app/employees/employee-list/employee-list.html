@@ -75,10 +75,18 @@
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let employee">
             <div class="row-actions">
-              <button mat-button type="button" aria-label="Edit {{ employee.username }}"
-                (click)="notifyAction('Edit', employee.username)">Edit</button>
-              <button mat-button type="button" aria-label="Delete {{ employee.username }}"
-                (click)="notifyAction('Delete', employee.username)">Delete</button>
+              <a mat-icon-button [routerLink]="['/employees', employee.id]" queryParamsHandling="preserve"
+                aria-label="Detail {{ employee.username }}" title="Detail">
+                <mat-icon fontIcon="visibility" aria-hidden="true"></mat-icon>
+              </a>
+              <button mat-icon-button type="button" aria-label="Edit {{ employee.username }}"
+                title="Edit (demo)" (click)="notifyAction('Edit', employee.username)">
+                <mat-icon fontIcon="edit" aria-hidden="true"></mat-icon>
+              </button>
+              <button mat-icon-button type="button" aria-label="Delete {{ employee.username }}"
+                title="Delete (demo)" (click)="notifyAction('Delete', employee.username)">
+                <mat-icon fontIcon="delete" aria-hidden="true"></mat-icon>
+              </button>
             </div>
           </td>
         </ng-container>

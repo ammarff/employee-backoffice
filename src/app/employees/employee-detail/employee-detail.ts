@@ -6,9 +6,10 @@ import '@angular/common/locales/global/id';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  imports: [CurrencyPipe, DatePipe, RouterLink, MatButtonModule],
+  imports: [CurrencyPipe, DatePipe, RouterLink, MatButtonModule, MatIconModule],
   selector: 'app-employee-detail',
   styleUrl: './employee-detail.scss',
   templateUrl: './employee-detail.html',

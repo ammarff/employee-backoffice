@@ -69,15 +69,34 @@ describe('EmployeeDetail', () => {
     expect(text).toContain('01 Januari 2026');
   });
 
-  it('preserves search filters in the OK link', async () => {
+  it('uses Back instead of OK and preserves search filters', async () => {
     const harness = await RouterTestingHarness.create(
       '/employees/employee-12?username=employee1&group=Group%202',
     );
-    const link = harness.routeNativeElement?.querySelector('a');
+    const page = harness.routeNativeElement!;
+    const link = page.querySelector('a[aria-label="Kembali ke daftar employee"]');
 
-    expect(link?.textContent?.trim()).toBe('OK');
+    expect(link?.textContent?.trim()).toBe('Back');
     expect(link?.getAttribute('href'))
       .toBe('/employees?username=employee1&group=Group%202');
+    expect(Array.from(page.querySelectorAll('a, button')).map(element => element.textContent?.trim()))
+      .not.toContain('OK');
+  });
+
+  it('shows a breadcrumb and a Back link that preserve the search', async () => {
+    const harness = await RouterTestingHarness.create(
+      '/employees/employee-12?username=employee1&group=Group%202',
+    );
+    const page = harness.routeNativeElement!;
+    const breadcrumb = page.querySelector('nav[aria-label="Breadcrumb"]');
+    const back = page.querySelector('a[aria-label="Kembali ke daftar employee"]');
+
+    expect(breadcrumb?.querySelector('a')?.textContent?.trim()).toBe('Employees');
+    expect(breadcrumb?.querySelector('a')?.getAttribute('href'))
+      .toBe('/employees?username=employee1&group=Group%202');
+    expect(breadcrumb?.querySelector('[aria-current="page"]')?.textContent).toBe('employee12');
+    expect(back?.textContent?.trim()).toBe('Back');
+    expect(back?.getAttribute('href')).toBe('/employees?username=employee1&group=Group%202');
   });
 
   it('warns when the store could not read the saved data', async () => {

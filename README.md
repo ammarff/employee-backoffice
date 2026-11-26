@@ -33,16 +33,18 @@ Password tidak disimpan atau dicetak ke console. Gunakan data employee dummy saj
 
 - `/login`: validasi input dan akun demo.
 - `/employees`: 100 dummy employee awal, sorting username/email/group/status/salary, pagination, pilihan page size,
-  serta pencarian username dan group dengan aturan AND. Kolom Action menyediakan Edit
-  dan Delete dummy: notifikasi Edit kuning, Delete merah, tanpa mengubah data.
+  serta pencarian username dan group dengan aturan AND. Kolom Action menyediakan ikon Detail,
+  Edit, dan Delete. Notifikasi Edit kuning dan Delete merah muncul di bagian atas,
+  tanpa mengubah data.
 - `/employees/add`: semua field wajib, validasi email, salary angka, birthDate tidak
   melewati hari ini, serta autocomplete untuk mencari salah satu dari 10 group.
   Save menyimpan data lalu kembali ke list; Cancel kembali tanpa menyimpan.
 - `/employees/:id`: detail employee, format rupiah dan tanggal Indonesia, pesan jika ID
-  tidak ditemukan, serta link OK untuk kembali ke list.
+  tidak ditemukan, breadcrumb, serta Back untuk kembali ke list dengan filter yang sama.
 
 Pencarian berupa substring, tidak membedakan huruf besar/kecil. Kedua filter disimpan
-sebagai query params dan dibawa pada navigasi list → detail → OK.
+sebagai query params dan dibawa pada navigasi list → detail → Back.
+Label tombol kembali menggunakan Back (menggantikan OK pada PDF) sesuai perubahan yang diminta.
 `description` menggunakan datetime mengikuti tipe pada spesifikasi, bukan kolom teks.
 Input datetime memakai waktu lokal browser; data baru disimpan sebagai ISO UTC dan
 tanggal detail ditampilkan dalam UTC.
@@ -78,7 +80,7 @@ Build berada di `dist/employee-backoffice/`.
 Belum ada runner end-to-end terpisah.
 
 Keempat halaman dimuat dengan `loadComponent` agar kode halaman lain tidak masuk bundle
-awal. Pada build produksi terakhir, initial bundle 303,64 kB (sebelumnya 737,55 kB),
+awal. Pada build produksi terakhir, initial bundle 323,00 kB (sebelum lazy loading 737,55 kB),
 di bawah budget warning 500 kB yang tidak diubah. Ukuran ini bukan total seluruh lazy
 chunk dan bukan pengukuran waktu muat pengguna.
 
@@ -96,7 +98,7 @@ bukan sertifikasi WCAG; pengujian manual dengan screen reader dan perangkat fisi
 
 ## Status pengumpulan
 
-Verifikasi terakhir: 95 tes lulus dan build produksi berhasil tanpa peringatan budget.
+Verifikasi terakhir: 97 tes lulus dan build produksi berhasil tanpa peringatan budget.
 Repo publik: [ammarff/employee-backoffice](https://github.com/ammarff/employee-backoffice).
 Dependencies, build/cache, file environment rahasia, `learning/`, dan `.vscode/`
 dikecualikan melalui `.gitignore`. Folder lokal tetap tersedia tanpa dilacak Git.

@@ -2,6 +2,41 @@
   display: block;
 }
 
+.breadcrumb {
+  margin-bottom: 1rem;
+  color: var(--app-muted);
+  font-size: 0.875rem;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb li {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumb a {
+  color: var(--app-accent);
+  text-underline-offset: 0.25rem;
+}
+
+.breadcrumb-separator {
+  margin-right: 0.5rem;
+}
+
+.page-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
 .profile-panel,
 .empty-profile {
   padding: 1.5rem;
@@ -49,6 +84,10 @@ dd {
 }
 
 @media (max-width: 40rem) {
+  .page-actions a {
+    flex: 1;
+  }
+
   .profile-panel,
   .empty-profile {
     padding: 1rem;
