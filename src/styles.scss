@@ -1,0 +1,166 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+:root {
+  --app-background: #f4f7fb;
+  --app-panel: #ffffff;
+  --app-border: #dfe6ef;
+  --app-text: #172b45;
+  --app-muted: #526175;
+  --app-accent: #0759b5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  scrollbar-gutter: stable;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--app-background);
+  color: var(--app-text);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  min-height: 100%;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--app-accent);
+  outline-offset: 3px;
+}
+
+.page {
+  width: min(100%, 76rem);
+  margin-inline: auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.page--narrow {
+  max-width: 56rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-header > div {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin-bottom: 0.5rem;
+  color: var(--app-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.page-description {
+  max-width: 65ch;
+  margin-top: 0.5rem;
+  color: var(--app-muted);
+  line-height: 1.6;
+}
+
+.panel {
+  border: 1px solid var(--app-border);
+  border-radius: 0.75rem;
+  background: var(--app-panel);
+  box-shadow: 0 1px 2px rgb(23 43 69 / 4%);
+}
+
+.notice {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #f2cf81;
+  border-left: 4px solid #a96800;
+  border-radius: 0.5rem;
+  background: #fff8e8;
+  color: #714816;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.form-error {
+  color: var(--mat-sys-error);
+  line-height: 1.6;
+}
+
+@media (max-width: 40rem) {
+  .page {
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .page-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+.notification-edit {
+  @include mat.snack-bar-overrides((
+    container-color: #fef3c7,
+    supporting-text-color: #713f12,
+    button-color: #713f12,
+  ));
+}
+
+.notification-delete {
+  @include mat.snack-bar-overrides((
+    container-color: #b91c1c,
+    supporting-text-color: #ffffff,
+    button-color: #ffffff,
+  ));
+}

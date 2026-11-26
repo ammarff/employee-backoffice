@@ -1,0 +1,105 @@
+<main class="page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">People operations</p>
+      <h1>Employees</h1>
+      <p class="page-description">{{ store.employees().length }} employee dalam direktori tim.</p>
+    </div>
+    <a mat-flat-button routerLink="/employees/add" queryParamsHandling="preserve">Add Employee</a>
+  </div>
+  @if (store.storageError(); as error) {
+    <div role="alert" class="notice">
+      <p>{{ error }}</p>
+      <button mat-button type="button" name="resetEmployees" (click)="resetStoredData()">
+        Reset ke 100 dummy employee
+      </button>
+    </div>
+  }
+
+  <section class="panel search-panel" aria-labelledby="search-title">
+    <h2 id="search-title">Cari employee</h2>
+    <p class="search-help">Username dan group dicocokkan bersamaan dengan aturan AND.</p>
+    <form class="search-controls" [formGroup]="searchForm" (ngSubmit)="applyFilters()" aria-labelledby="search-title">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput type="search" formControlName="username" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Group</mat-label>
+        <input matInput type="search" formControlName="group" autocomplete="off">
+      </mat-form-field>
+      <button mat-flat-button type="submit">Search</button>
+    </form>
+  </section>
+
+  <section class="panel table-panel" aria-labelledby="directory-title">
+    <div class="table-heading">
+      <h2 id="directory-title">Employee directory</h2>
+      <span>{{ dataSource.data.length }} hasil</span>
+    </div>
+    <div class="table-scroll" role="region" aria-labelledby="directory-title" tabindex="0">
+      <table mat-table [dataSource]="dataSource" matSort aria-label="Daftar employee">
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="username">Username</th>
+          <td mat-cell *matCellDef="let employee">
+            <a class="employee-link" [routerLink]="['/employees', employee.id]" queryParamsHandling="preserve">
+              {{ employee.username }}
+            </a>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let employee">{{ employee.firstName }} {{ employee.lastName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="email">Email</th>
+          <td mat-cell *matCellDef="let employee">{{ employee.email }}</td>
+        </ng-container>
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="group">Group</th>
+          <td mat-cell *matCellDef="let employee">{{ employee.group }}</td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
+          <td mat-cell *matCellDef="let employee">
+            <span class="status-badge" [class.status-active]="employee.status === 'Active'">{{ employee.status }}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="basicSalary">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="basicSalary">Basic salary</th>
+          <td mat-cell *matCellDef="let employee" class="salary">
+            {{ employee.basicSalary | currency:'IDR':'symbol':'1.2-2':'id' }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let employee">
+            <div class="row-actions">
+              <button mat-button type="button" aria-label="Edit {{ employee.username }}"
+                (click)="notifyAction('Edit', employee.username)">Edit</button>
+              <button mat-button type="button" aria-label="Delete {{ employee.username }}"
+                (click)="notifyAction('Delete', employee.username)">Delete</button>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr *matNoDataRow>
+          <td [attr.colspan]="displayedColumns.length" class="empty-state">
+            <div role="status">
+              <strong>Tidak ada employee yang sesuai.</strong>
+              <p>Ubah atau kosongkan filter, lalu klik Search untuk mencoba lagi.</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <p class="table-note">Klik username untuk melihat detail. Geser tabel pada layar kecil.</p>
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 25, 50]"
+      aria-label="Employee pagination">
+    </mat-paginator>
+  </section>
+</main>

@@ -1,0 +1,94 @@
+<main class="page page--narrow">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Employee management</p>
+      <h1>Add Employee</h1>
+      <p class="page-description">Semua field wajib diisi. Gunakan data dummy, bukan data pribadi sungguhan.</p>
+    </div>
+  </div>
+  @if (errorMessage || store.storageError(); as error) {
+    <p role="alert" class="notice form-error">{{ error }}</p>
+  }
+
+  <form class="employee-form panel" [formGroup]="employeeForm" (ngSubmit)="onSave()" aria-label="Tambah employee">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" autocomplete="off" required>
+      @if (employeeForm.controls.username.invalid && employeeForm.controls.username.touched) {
+        <mat-error>Username wajib diisi.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" autocomplete="given-name" required>
+      @if (employeeForm.controls.firstName.invalid && employeeForm.controls.firstName.touched) {
+        <mat-error>First name wajib diisi.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" autocomplete="family-name" required>
+      @if (employeeForm.controls.lastName.invalid && employeeForm.controls.lastName.touched) {
+        <mat-error>Last name wajib diisi.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" autocomplete="email" required>
+      @if (employeeForm.controls.email.invalid && employeeForm.controls.email.touched) {
+        <mat-error>Masukkan alamat email yang valid.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Birth date</mat-label>
+      <input matInput type="datetime-local" formControlName="birthDate" [max]="maxBirthDate" required>
+      @if (employeeForm.controls.birthDate.invalid && employeeForm.controls.birthDate.touched) {
+        <mat-error>Tanggal lahir wajib valid dan tidak boleh melewati hari ini.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Basic salary</mat-label>
+      <span matTextPrefix>Rp&nbsp;</span>
+      <input matInput type="number" step="0.01" inputmode="decimal" formControlName="basicSalary" required>
+      @if (employeeForm.controls.basicSalary.invalid && employeeForm.controls.basicSalary.touched) {
+        <mat-error>Basic salary wajib berupa angka.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <input matInput formControlName="status" required>
+      @if (employeeForm.controls.status.invalid && employeeForm.controls.status.touched) {
+        <mat-error>Status wajib diisi.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Group</mat-label>
+      <input matInput formControlName="group" [matAutocomplete]="groups" autocomplete="off" required>
+      <mat-autocomplete #groups="matAutocomplete">
+        @for (group of filteredGroups(); track group) {
+          <mat-option [value]="group">{{ group }}</mat-option>
+        } @empty {
+          <mat-option disabled>Group tidak ditemukan</mat-option>
+        }
+      </mat-autocomplete>
+      <mat-hint>Ketik untuk mencari, lalu pilih satu dari 10 group.</mat-hint>
+      @if (employeeForm.controls.group.invalid && employeeForm.controls.group.touched) {
+        <mat-error>Pilih group yang tersedia.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description (tanggal)</mat-label>
+      <input matInput type="datetime-local" formControlName="description" required>
+      <mat-hint>Mengikuti tipe datetime pada spesifikasi assessment.</mat-hint>
+      @if (employeeForm.controls.description.invalid && employeeForm.controls.description.touched) {
+        <mat-error>Description wajib berupa tanggal yang valid.</mat-error>
+      }
+    </mat-form-field>
+    <div class="form-actions">
+      <button mat-flat-button type="submit" [disabled]="employeeForm.invalid || saving">
+        {{ saving ? 'Menyimpan…' : 'Save' }}
+      </button>
+      <a mat-button routerLink="/employees" queryParamsHandling="preserve">Cancel</a>
+    </div>
+  </form>
+</main>

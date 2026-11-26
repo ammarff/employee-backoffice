@@ -1,0 +1,54 @@
+<main class="page page--narrow">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Employee profile</p>
+      <h1>{{ employee?.username ?? 'Employee detail' }}</h1>
+      <p class="page-description">Informasi employee dan kompensasi dasar.</p>
+    </div>
+    <a mat-flat-button routerLink="/employees" queryParamsHandling="preserve">OK</a>
+  </div>
+
+  @if (storageError(); as error) {
+    <p role="alert" class="notice">{{ error }}</p>
+  }
+  @if (employee; as item) {
+    <section class="panel profile-panel" aria-label="Informasi employee">
+      <h2>Employee information</h2>
+      <dl class="detail-grid">
+        <div>
+          <dt>Nama lengkap</dt>
+          <dd>{{ item.firstName }} {{ item.lastName }}</dd>
+        </div>
+        <div>
+          <dt>Email</dt>
+          <dd>{{ item.email }}</dd>
+        </div>
+        <div>
+          <dt>Group</dt>
+          <dd>{{ item.group }}</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>{{ item.status }}</dd>
+        </div>
+        <div>
+          <dt>Tanggal lahir</dt>
+          <dd>{{ item.birthDate | date:'dd MMMM yyyy':'UTC':'id' }}</dd>
+        </div>
+        <div>
+          <dt>Description</dt>
+          <dd>{{ item.description | date:'dd MMMM yyyy':'UTC':'id' }}</dd>
+        </div>
+        <div class="salary-field">
+          <dt>Basic salary</dt>
+          <dd>{{ item.basicSalary | currency:'IDR':'symbol':'1.2-2':'id' }}</dd>
+        </div>
+      </dl>
+    </section>
+  } @else {
+    <section class="panel empty-profile">
+      <p role="alert">Employee tidak ditemukan.</p>
+      <p class="page-description">Periksa ID pada URL atau klik OK untuk kembali ke direktori.</p>
+    </section>
+  }
+</main>

@@ -1,0 +1,60 @@
+:host {
+  display: block;
+}
+
+.profile-panel,
+.empty-profile {
+  padding: 1.5rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2rem;
+  margin: 1rem 0 0;
+}
+
+.detail-grid > div {
+  min-width: 0;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--app-border);
+}
+
+dt {
+  margin-bottom: 0.5rem;
+  color: var(--app-muted);
+  font-size: 0.875rem;
+}
+
+dd {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.detail-grid .salary-field {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--app-background);
+}
+
+.salary-field dd {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 40rem) {
+  .profile-panel,
+  .empty-profile {
+    padding: 1rem;
+  }
+
+  .detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

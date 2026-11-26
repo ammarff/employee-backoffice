@@ -1,0 +1,34 @@
+<main class="page login-page">
+  <section class="panel login-card" aria-labelledby="login-title">
+    <p class="eyebrow">Employee management</p>
+    <h1 id="login-title">Welcome back</h1>
+    <p class="page-description">Masuk untuk melihat dan mengelola data employee.</p>
+
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-labelledby="login-title">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" autocomplete="username" required>
+        @if (loginForm.controls.username.invalid && loginForm.controls.username.touched) {
+          <mat-error>Username wajib diisi.</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" autocomplete="current-password" required>
+        @if (loginForm.controls.password.invalid && loginForm.controls.password.touched) {
+          <mat-error>Password wajib diisi.</mat-error>
+        }
+      </mat-form-field>
+      @if (errorMessage) {
+        <p role="alert" class="form-error">{{ errorMessage }}</p>
+      }
+      <button mat-flat-button type="submit" [disabled]="loginForm.invalid">Login</button>
+    </form>
+
+    <div class="demo-credentials">
+      <p><strong>Akun demo</strong></p>
+      <p>Username <code>admin</code> · Password <code>admin123</code></p>
+      <p>Gunakan data dummy, bukan kredensial pribadi.</p>
+    </div>
+  </section>
+</main>

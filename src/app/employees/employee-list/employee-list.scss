@@ -1,0 +1,147 @@
+:host {
+  display: block;
+}
+
+.search-panel {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.search-help {
+  margin-top: 0.5rem;
+  color: var(--app-muted);
+  font-size: 0.875rem;
+}
+
+.search-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.search-controls button {
+  min-height: 3.5rem;
+}
+
+mat-form-field {
+  min-width: 0;
+  width: 100%;
+}
+
+.table-panel {
+  overflow: hidden;
+}
+
+.table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.table-heading span,
+.table-note {
+  color: var(--app-muted);
+  font-size: 0.75rem;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.table-scroll:focus-visible {
+  outline-offset: -3px;
+}
+
+table {
+  min-width: 64rem;
+  width: 100%;
+}
+
+th {
+  background: var(--app-background);
+  color: var(--app-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+td,
+th {
+  border-bottom-color: var(--app-border);
+}
+
+td {
+  padding-block: 0.75rem;
+}
+
+tr[mat-row]:hover {
+  background: #f8fafd;
+}
+
+.employee-link {
+  color: var(--app-accent);
+  font-weight: 500;
+  text-underline-offset: 0.25rem;
+}
+
+.salary {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+  background: var(--app-background);
+  color: var(--app-muted);
+  font-size: 0.75rem;
+}
+
+.status-active {
+  background: #e7f5ed;
+  color: #17623b;
+}
+
+.row-actions {
+  display: flex;
+  white-space: nowrap;
+}
+
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.empty-state p {
+  margin-top: 0.5rem;
+  color: var(--app-muted);
+}
+
+.table-note {
+  padding: 1rem 1.5rem;
+}
+
+mat-paginator {
+  border-top: 1px solid var(--app-border);
+  background: transparent;
+}
+
+@media (max-width: 40rem) {
+  .search-panel,
+  .table-heading {
+    padding: 1rem;
+  }
+
+  .search-controls {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+}
